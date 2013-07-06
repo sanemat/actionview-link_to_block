@@ -20,6 +20,10 @@ module LinkToBlock
             end
           end
         end
+
+        def link_to_block_if(condition, name = nil, options = nil, html_options = nil, &block)
+          link_to_block_unless !condition, name, options, html_options, &block
+        end
       end
     end
   end

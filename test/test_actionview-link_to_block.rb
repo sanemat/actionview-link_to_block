@@ -137,11 +137,10 @@ class LinkToBlockTest < ActiveSupport::TestCase
     assert_equal '<a href="/">Example site</a>', out
   end
 
-  # def test_link_to_if
-  #   assert_equal "Showing", link_to_if(false, "Showing", url_hash)
-  #   assert_dom_equal %{<a href="/">Listing</a>}, link_to_if(true, "Listing", url_hash)
-  #   assert_equal "Showing", link_to_if(false, "Showing", url_hash)
-  # end
+  def test_link_to_block_if
+    assert_equal "Showing", link_to_block_if(false, "Showing", url_hash)
+    assert_dom_equal %{<a href="/">Listing</a>}, link_to_block_if(true, "Listing", url_hash)
+  end
 
   # def request_for_url(url, opts = {})
   #   env = Rack::MockRequest.env_for("http://www.example.com#{url}", opts)
