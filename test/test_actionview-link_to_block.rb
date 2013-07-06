@@ -7,6 +7,29 @@ require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 require 'action_dispatch'
 
+# copy from action_view/test/abstract_unit.rb
+module RenderERBUtils
+  def view
+    @view ||= begin
+      path = ActionView::FileSystemResolver.new(FIXTURE_LOAD_PATH)
+      view_paths = ActionView::PathSet.new([path])
+      ActionView::Base.new(view_paths)
+    end
+  end
+
+  def render_erb(string)
+    @virtual_path = nil
+
+    template = ActionView::Template.new(
+      string.strip,
+      "test template",
+      ActionView::Template::Handlers::ERB,
+      {})
+
+    template.render(self, {}).strip
+  end
+end
+
 class LinkToBlockTest < ActiveSupport::TestCase
   attr_accessor :controller, :request
 
@@ -21,6 +44,8 @@ class LinkToBlockTest < ActiveSupport::TestCase
   include routes.url_helpers
 
   include ActionDispatch::Assertions::DomAssertions
+  include ActionView::Context
+  include RenderERBUtils
 
   def hash_for(options = {})
     { controller: "foo", action: "bar" }.merge!(options)
@@ -34,158 +59,43 @@ class LinkToBlockTest < ActiveSupport::TestCase
   end
 
   def test_link_tag_with_straight_url
-    assert_dom_equal %{<a href="http://www.example.com">Hello</a>}, link_to("Hello", "http://www.example.com")
+    assert_dom_equal %{<a href="http://www.example.com">Hello</a>}, link_to_block("Hello", "http://www.example.com")
   end
 
   def test_link_tag_without_host_option
-    assert_dom_equal(%{<a href="/">Test Link</a>}, link_to('Test Link', url_hash))
+    assert_dom_equal(%{<a href="/">Test Link</a>}, link_to_block('Test Link', url_hash))
   end
 
   def test_link_tag_with_host_option
     hash = hash_for(host: "www.example.com")
     expected = %{<a href="http://www.example.com/">Test Link</a>}
-    assert_dom_equal(expected, link_to('Test Link', hash))
+    assert_dom_equal(expected, link_to_block('Test Link', hash))
   end
 
   def test_link_tag_with_query
     expected = %{<a href="http://www.example.com?q1=v1&amp;q2=v2">Hello</a>}
-    assert_dom_equal expected, link_to("Hello", "http://www.example.com?q1=v1&q2=v2")
+    assert_dom_equal expected, link_to_block("Hello", "http://www.example.com?q1=v1&q2=v2")
   end
 
   def test_link_tag_with_query_and_no_name
     expected = %{<a href="http://www.example.com?q1=v1&amp;q2=v2">http://www.example.com?q1=v1&amp;q2=v2</a>}
-    assert_dom_equal expected, link_to(nil, "http://www.example.com?q1=v1&q2=v2")
+    assert_dom_equal expected, link_to_block(nil, "http://www.example.com?q1=v1&q2=v2")
   end
 
-  # def test_link_tag_with_back
-  #   env = {"HTTP_REFERER" => "http://www.example.com/referer"}
-  #   @controller = Struct.new(:request).new(Struct.new(:env).new(env))
-  #   expected = %{<a href="#{env["HTTP_REFERER"]}">go back</a>}
-  #   assert_dom_equal expected, link_to('go back', :back)
-  # end
+  def test_link_tag_with_block
+    assert_dom_equal %{<a href="/"><span>Example site</span></a>},
+      link_to_block('/') { content_tag(:span, 'Example site') }
+  end
 
-  # def test_link_tag_with_back_and_no_referer
-  #   @controller = Struct.new(:request).new(Struct.new(:env).new({}))
-  #   link = link_to('go back', :back)
-  #   assert_dom_equal %{<a href="javascript:history.back()">go back</a>}, link
-  # end
+  def test_link_tag_with_block_and_html_options
+    assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
+      link_to_block('/', class: "special") { content_tag(:span, 'Example site') }
+  end
 
-  # def test_link_tag_with_img
-  #   link = link_to("<img src='/favicon.jpg' />".html_safe, "/")
-  #   expected = %{<a href="/"><img src='/favicon.jpg' /></a>}
-  #   assert_dom_equal expected, link
-  # end
-
-  # def test_link_with_nil_html_options
-  #   link = link_to("Hello", url_hash, nil)
-  #   assert_dom_equal %{<a href="/">Hello</a>}, link
-  # end
-
-  # def test_link_tag_with_custom_onclick
-  #   link = link_to("Hello", "http://www.example.com", onclick: "alert('yay!')")
-  #   expected = %{<a href="http://www.example.com" onclick="alert(&#39;yay!&#39;)">Hello</a>}
-  #   assert_dom_equal expected, link
-  # end
-
-  # def test_link_tag_with_javascript_confirm
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-confirm="Are you sure?">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", data: { confirm: "Are you sure?" })
-  #   )
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-confirm="You cant possibly be sure, can you?">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", data: { confirm: "You cant possibly be sure, can you?" })
-  #   )
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-confirm="You cant possibly be sure,\n can you?">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", data: { confirm: "You cant possibly be sure,\n can you?" })
-  #   )
-  # end
-
-  # def test_link_to_with_remote
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-remote="true">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", remote: true)
-  #   )
-  # end
-
-  # def test_link_to_with_remote_false
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", remote: false)
-  #   )
-  # end
-
-  # def test_link_to_with_symbolic_remote_in_non_html_options
-  #   assert_dom_equal(
-  #     %{<a href="/" data-remote="true">Hello</a>},
-  #     link_to("Hello", hash_for(remote: true), {})
-  #   )
-  # end
-
-  # def test_link_to_with_string_remote_in_non_html_options
-  #   assert_dom_equal(
-  #     %{<a href="/" data-remote="true">Hello</a>},
-  #     link_to("Hello", hash_for('remote' => true), {})
-  #   )
-  # end
-
-  # def test_link_tag_using_post_javascript
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-method="post" rel="nofollow">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", method: :post)
-  #   )
-  # end
-
-  # def test_link_tag_using_delete_javascript
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" rel="nofollow" data-method="delete">Destroy</a>},
-  #     link_to("Destroy", "http://www.example.com", method: :delete)
-  #   )
-  # end
-
-  # def test_link_tag_using_delete_javascript_and_href
-  #   assert_dom_equal(
-  #     %{<a href="\#" rel="nofollow" data-method="delete">Destroy</a>},
-  #     link_to("Destroy", "http://www.example.com", method: :delete, href: '#')
-  #   )
-  # end
-
-  # def test_link_tag_using_post_javascript_and_rel
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-method="post" rel="example nofollow">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", method: :post, rel: 'example')
-  #   )
-  # end
-
-  # def test_link_tag_using_post_javascript_and_confirm
-  #   assert_dom_equal(
-  #     %{<a href="http://www.example.com" data-method="post" rel="nofollow" data-confirm="Are you serious?">Hello</a>},
-  #     link_to("Hello", "http://www.example.com", method: :post, data: { confirm: "Are you serious?" })
-  #   )
-  # end
-
-  # def test_link_tag_using_delete_javascript_and_href_and_confirm
-  #   assert_dom_equal(
-  #     %{<a href="\#" rel="nofollow" data-confirm="Are you serious?" data-method="delete">Destroy</a>},
-  #     link_to("Destroy", "http://www.example.com", method: :delete, href: '#', data: { confirm: "Are you serious?" })
-  #   )
-  # end
-
-  # def test_link_tag_with_block
-  #   assert_dom_equal %{<a href="/"><span>Example site</span></a>},
-  #     link_to('/') { content_tag(:span, 'Example site') }
-  # end
-
-  # def test_link_tag_with_block_and_html_options
-  #   assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
-  #     link_to('/', class: "special") { content_tag(:span, 'Example site') }
-  # end
-
-  # def test_link_tag_using_block_in_erb
-  #   out = render_erb %{<%= link_to('/') do %>Example site<% end %>}
-  #   assert_equal '<a href="/">Example site</a>', out
-  # end
+  def test_link_tag_using_block_in_erb
+    out = render_erb %{<%= link_to_block('/') do %>Example site<% end %>}
+    assert_equal '<a href="/">Example site</a>', out
+  end
 
   # def test_link_tag_with_html_safe_string
   #   assert_dom_equal(
