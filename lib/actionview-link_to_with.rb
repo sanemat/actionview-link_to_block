@@ -1,7 +1,2 @@
-require "actionview/link_to_with/version"
-
-module Actionview
-  module LinkToWith
-    # Your code goes here...
-  end
-end
+require 'action_view/link_to_with/version'
+require 'action_view/link_to_with/railtie' if defined? Rails
