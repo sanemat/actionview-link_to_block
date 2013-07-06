@@ -1,5 +1,9 @@
 # Actionview::LinkToBlock
 
+[![Gem Version](https://badge.fury.io/rb/actionview-link_to_block.png)](http://badge.fury.io/rb/actionview-link_to_block)
+[![Build Status](https://api.travis-ci.org/sanemat/actionview-link_to_block.png?branch=master)](https://travis-ci.org/sanemat/actionview-link_to_block)
+[![Code Climate](https://codeclimate.com/github/sanemat/actionview-link_to_block.png)](https://codeclimate.com/github/sanemat/actionview-link_to_block)
+
 TODO: Write a gem description
 
 ## Installation
