@@ -26,7 +26,12 @@ module LinkToBlock
         end
 
         def link_to_block_unless_current(name = nil, options = nil, html_options = nil, &block)
-          link_to_block_unless current_page?(options), name, options, html_options, &block
+          if block_given?
+            html_options, options = options, name
+            link_to_block_unless current_page?(options), options, html_options, &block
+          else
+            link_to_block_unless current_page?(options), name, options, html_options
+          end
         end
       end
     end
