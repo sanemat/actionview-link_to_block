@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "pry"
 gem "appraisal", :github=>"thoughtbot/appraisal"
-gem "actionview", :github=>"rails/rails", :branch=>"master"
+gem "actionview", :github=>"rails", :branch=>"master"
+gem "actionpack", :github=>"rails", :branch=>"master"
 
 gemspec :path=>".././"
