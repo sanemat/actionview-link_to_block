@@ -1,4 +1,8 @@
-require 'active_support/testing/autorun'
+require 'active_support/version'
+autorun_path = ActiveSupport::VERSION::STRING.start_with?('3')\
+  ? 'minitest/autorun'
+  : 'active_support/testing/autorun'
+require autorun_path
 require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 
