@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ActionView::LinkToBlock::VERSION
   spec.authors       = ["sanemat"]
   spec.email         = ["o.gata.ken@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Link to with block}
+  spec.summary       = %q{Link to with block}
+  spec.homepage      = "https://github.com/sanemat/actionview-link_to_block"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
