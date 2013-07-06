@@ -137,47 +137,14 @@ class LinkToBlockTest < ActiveSupport::TestCase
     assert_equal '<a href="/">Example site</a>', out
   end
 
-  # def test_link_to_if
-  #   assert_equal "Showing", link_to_if(false, "Showing", url_hash)
-  #   assert_dom_equal %{<a href="/">Listing</a>}, link_to_if(true, "Listing", url_hash)
-  #   assert_equal "Showing", link_to_if(false, "Showing", url_hash)
-  # end
+  def test_link_to_block_if
+    assert_equal "Showing", link_to_block_if(false, "Showing", url_hash)
+    assert_dom_equal %{<a href="/">Listing</a>}, link_to_block_if(true, "Listing", url_hash)
+  end
 
   # def request_for_url(url, opts = {})
   #   env = Rack::MockRequest.env_for("http://www.example.com#{url}", opts)
   #   ActionDispatch::Request.new(env)
-  # end
-
-  # def test_current_page_with_http_head_method
-  #   @request = request_for_url("/", :method => :head)
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_with_simple_url
-  #   @request = request_for_url("/")
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_ignoring_params
-  #   @request = request_for_url("/?order=desc&page=1")
-
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_with_params_that_match
-  #   @request = request_for_url("/?order=desc&page=1")
-
-  #   assert current_page?(hash_for(order: "desc", page: "1"))
-  #   assert current_page?("http://www.example.com/?order=desc&page=1")
-  # end
-
-  # def test_current_page_with_not_get_verb
-  #   @request = request_for_url("/events", method: :post)
-
-  #   assert !current_page?('/events')
   # end
 
   # def test_link_unless_current
