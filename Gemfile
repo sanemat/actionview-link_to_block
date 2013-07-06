@@ -5,4 +5,3 @@ gemspec
 
 gem 'pry'
 gem 'appraisal', github: 'thoughtbot/appraisal'
-gem 'actionview', github: 'rails/rails', branch: 'master'
