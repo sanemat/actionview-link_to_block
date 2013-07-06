@@ -7,6 +7,29 @@ require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 require 'action_dispatch'
 
+# copy from action_view/test/abstract_unit.rb
+module RenderERBUtils
+  def view
+    @view ||= begin
+      path = ActionView::FileSystemResolver.new(FIXTURE_LOAD_PATH)
+      view_paths = ActionView::PathSet.new([path])
+      ActionView::Base.new(view_paths)
+    end
+  end
+
+  def render_erb(string)
+    @virtual_path = nil
+
+    template = ActionView::Template.new(
+      string.strip,
+      "test template",
+      ActionView::Template::Handlers::ERB,
+      {})
+
+    template.render(self, {}).strip
+  end
+end
+
 class LinkToBlockTest < ActiveSupport::TestCase
   attr_accessor :controller, :request
 
@@ -21,6 +44,8 @@ class LinkToBlockTest < ActiveSupport::TestCase
   include routes.url_helpers
 
   include ActionDispatch::Assertions::DomAssertions
+  include ActionView::Context
+  include RenderERBUtils
 
   def hash_for(options = {})
     { controller: "foo", action: "bar" }.merge!(options)
@@ -172,20 +197,20 @@ class LinkToBlockTest < ActiveSupport::TestCase
   #   )
   # end
 
-  # def test_link_tag_with_block
-  #   assert_dom_equal %{<a href="/"><span>Example site</span></a>},
-  #     link_to('/') { content_tag(:span, 'Example site') }
-  # end
+  def test_link_tag_with_block
+    assert_dom_equal %{<a href="/"><span>Example site</span></a>},
+      link_to('/') { content_tag(:span, 'Example site') }
+  end
 
-  # def test_link_tag_with_block_and_html_options
-  #   assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
-  #     link_to('/', class: "special") { content_tag(:span, 'Example site') }
-  # end
+  def test_link_tag_with_block_and_html_options
+    assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
+      link_to('/', class: "special") { content_tag(:span, 'Example site') }
+  end
 
-  # def test_link_tag_using_block_in_erb
-  #   out = render_erb %{<%= link_to('/') do %>Example site<% end %>}
-  #   assert_equal '<a href="/">Example site</a>', out
-  # end
+  def test_link_tag_using_block_in_erb
+    out = render_erb %{<%= link_to('/') do %>Example site<% end %>}
+    assert_equal '<a href="/">Example site</a>', out
+  end
 
   # def test_link_tag_with_html_safe_string
   #   assert_dom_equal(
