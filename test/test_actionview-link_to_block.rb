@@ -114,29 +114,27 @@ class LinkToBlockTest < ActiveSupport::TestCase
       link_to_block("Malicious <script>content</script>".html_safe, "/")
   end
 
-  # def test_link_to_unless
-  #   assert_equal "Showing", link_to_unless(true, "Showing", url_hash)
+  def test_link_to_unless
+    assert_equal "Showing", link_to_block_unless(true, "Showing", url_hash)
 
-  #   assert_dom_equal %{<a href="/">Listing</a>},
-  #     link_to_unless(false, "Listing", url_hash)
+    assert_dom_equal %{<a href="/">Listing</a>},
+      link_to_block_unless(false, "Listing", url_hash)
+  end
 
-  #   assert_equal "Showing", link_to_unless(true, "Showing", url_hash)
+  def test_link_tag_unless_with_block
+    assert_dom_equal %{<a href="/"><span>Example site</span></a>},
+      link_to_block_unless(false, '/') { content_tag(:span, 'Example site') }
+  end
 
-  #   assert_equal "<strong>Showing</strong>",
-  #     link_to_unless(true, "Showing", url_hash) { |name|
-  #       "<strong>#{name}</strong>".html_safe
-  #     }
+  def test_link_tag_unless_with_block_and_html_options
+    assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
+      link_to_block_unless(false, '/', class: "special") { content_tag(:span, 'Example site') }
+  end
 
-  #   assert_equal "test",
-  #     link_to_unless(true, "Showing", url_hash) {
-  #       "test"
-  #     }
-
-  #   assert_equal %{&lt;b&gt;Showing&lt;/b&gt;}, link_to_unless(true, "<b>Showing</b>", url_hash)
-  #   assert_equal %{<a href="/">&lt;b&gt;Showing&lt;/b&gt;</a>}, link_to_unless(false, "<b>Showing</b>", url_hash)
-  #   assert_equal %{<b>Showing</b>}, link_to_unless(true, "<b>Showing</b>".html_safe, url_hash)
-  #   assert_equal %{<a href="/"><b>Showing</b></a>}, link_to_unless(false, "<b>Showing</b>".html_safe, url_hash)
-  # end
+  def test_link_tag_unless_using_block_in_erb
+    out = render_erb %{<%= link_to_block_unless(false, '/') do %>Example site<% end %>}
+    assert_equal '<a href="/">Example site</a>', out
+  end
 
   # def test_link_to_if
   #   assert_equal "Showing", link_to_if(false, "Showing", url_hash)
