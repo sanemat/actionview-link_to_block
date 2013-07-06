@@ -1,3 +1,4 @@
+#coding: utf-8
 require 'active_support/version'
 autorun_path = ActiveSupport::VERSION::STRING.start_with?('3')\
   ? 'minitest/autorun'
