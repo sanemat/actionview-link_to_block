@@ -97,22 +97,22 @@ class LinkToBlockTest < ActiveSupport::TestCase
     assert_equal '<a href="/">Example site</a>', out
   end
 
-  # def test_link_tag_with_html_safe_string
-  #   assert_dom_equal(
-  #     %{<a href="/article/Gerd_M%C3%BCller">Gerd Müller</a>},
-  #     link_to("Gerd Müller", article_path("Gerd_Müller".html_safe))
-  #   )
-  # end
+  def test_link_tag_with_html_safe_string
+    assert_dom_equal(
+      %{<a href="/article/Gerd_M%C3%BCller">Gerd Müller</a>},
+      link_to_block("Gerd Müller", article_path("Gerd_Müller".html_safe))
+    )
+  end
 
-  # def test_link_tag_escapes_content
-  #   assert_dom_equal %{<a href="/">Malicious &lt;script&gt;content&lt;/script&gt;</a>},
-  #     link_to("Malicious <script>content</script>", "/")
-  # end
+  def test_link_tag_escapes_content
+    assert_dom_equal %{<a href="/">Malicious &lt;script&gt;content&lt;/script&gt;</a>},
+      link_to_block("Malicious <script>content</script>", "/")
+  end
 
-  # def test_link_tag_does_not_escape_html_safe_content
-  #   assert_dom_equal %{<a href="/">Malicious <script>content</script></a>},
-  #     link_to("Malicious <script>content</script>".html_safe, "/")
-  # end
+  def test_link_tag_does_not_escape_html_safe_content
+    assert_dom_equal %{<a href="/">Malicious <script>content</script></a>},
+      link_to_block("Malicious <script>content</script>".html_safe, "/")
+  end
 
   # def test_link_to_unless
   #   assert_equal "Showing", link_to_unless(true, "Showing", url_hash)
