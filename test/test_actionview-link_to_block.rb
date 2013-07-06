@@ -59,41 +59,41 @@ class LinkToBlockTest < ActiveSupport::TestCase
   end
 
   def test_link_tag_with_straight_url
-    assert_dom_equal %{<a href="http://www.example.com">Hello</a>}, link_to("Hello", "http://www.example.com")
+    assert_dom_equal %{<a href="http://www.example.com">Hello</a>}, link_to_block("Hello", "http://www.example.com")
   end
 
   def test_link_tag_without_host_option
-    assert_dom_equal(%{<a href="/">Test Link</a>}, link_to('Test Link', url_hash))
+    assert_dom_equal(%{<a href="/">Test Link</a>}, link_to_block('Test Link', url_hash))
   end
 
   def test_link_tag_with_host_option
     hash = hash_for(host: "www.example.com")
     expected = %{<a href="http://www.example.com/">Test Link</a>}
-    assert_dom_equal(expected, link_to('Test Link', hash))
+    assert_dom_equal(expected, link_to_block('Test Link', hash))
   end
 
   def test_link_tag_with_query
     expected = %{<a href="http://www.example.com?q1=v1&amp;q2=v2">Hello</a>}
-    assert_dom_equal expected, link_to("Hello", "http://www.example.com?q1=v1&q2=v2")
+    assert_dom_equal expected, link_to_block("Hello", "http://www.example.com?q1=v1&q2=v2")
   end
 
   def test_link_tag_with_query_and_no_name
     expected = %{<a href="http://www.example.com?q1=v1&amp;q2=v2">http://www.example.com?q1=v1&amp;q2=v2</a>}
-    assert_dom_equal expected, link_to(nil, "http://www.example.com?q1=v1&q2=v2")
+    assert_dom_equal expected, link_to_block(nil, "http://www.example.com?q1=v1&q2=v2")
   end
 
   def test_link_tag_with_block
     assert_dom_equal %{<a href="/"><span>Example site</span></a>},
-      link_to('/') { content_tag(:span, 'Example site') }
+      link_to_block('/') { content_tag(:span, 'Example site') }
   end
 
   def test_link_tag_with_block_and_html_options
     assert_dom_equal %{<a class="special" href="/"><span>Example site</span></a>},
-      link_to('/', class: "special") { content_tag(:span, 'Example site') }
+      link_to_block('/', class: "special") { content_tag(:span, 'Example site') }
   end
 
   def test_link_tag_using_block_in_erb
-    out = render_erb %{<%= link_to('/') do %>Example site<% end %>}
+    out = render_erb %{<%= link_to_block('/') do %>Example site<% end %>}
     assert_equal '<a href="/">Example site</a>', out
   end
 
