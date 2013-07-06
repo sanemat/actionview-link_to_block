@@ -147,38 +147,6 @@ class LinkToBlockTest < ActiveSupport::TestCase
   #   ActionDispatch::Request.new(env)
   # end
 
-  # def test_current_page_with_http_head_method
-  #   @request = request_for_url("/", :method => :head)
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_with_simple_url
-  #   @request = request_for_url("/")
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_ignoring_params
-  #   @request = request_for_url("/?order=desc&page=1")
-
-  #   assert current_page?(url_hash)
-  #   assert current_page?("http://www.example.com/")
-  # end
-
-  # def test_current_page_with_params_that_match
-  #   @request = request_for_url("/?order=desc&page=1")
-
-  #   assert current_page?(hash_for(order: "desc", page: "1"))
-  #   assert current_page?("http://www.example.com/?order=desc&page=1")
-  # end
-
-  # def test_current_page_with_not_get_verb
-  #   @request = request_for_url("/events", method: :post)
-
-  #   assert !current_page?('/events')
-  # end
-
   # def test_link_unless_current
   #   @request = request_for_url("/")
 
