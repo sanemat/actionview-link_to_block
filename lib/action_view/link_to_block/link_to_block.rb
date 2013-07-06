@@ -4,7 +4,7 @@ module LinkToBlock
       module UrlHelper
         alias_method :link_to_block, :link_to
 
-        def link_to_block_unless(condition, name = nil, options = nil, html_options = nil, &block)
+        def link_to_block_unless(condition, name = nil, options = {}, html_options = {}, &block)
           if condition
             if block_given?
               capture(&block)
@@ -21,11 +21,11 @@ module LinkToBlock
           end
         end
 
-        def link_to_block_if(condition, name = nil, options = nil, html_options = nil, &block)
+        def link_to_block_if(condition, name = nil, options = {}, html_options = {}, &block)
           link_to_block_unless !condition, name, options, html_options, &block
         end
 
-        def link_to_block_unless_current(name = nil, options = nil, html_options = nil, &block)
+        def link_to_block_unless_current(name = nil, options = {}, html_options = {}, &block)
           if block_given?
             html_options, options = options, name
             link_to_block_unless current_page?(options), options, html_options, &block
