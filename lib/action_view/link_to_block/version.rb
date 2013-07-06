@@ -1,5 +1,5 @@
 module ActionView
-  module LinkToWith
+  module LinkToBlock
     VERSION = "0.0.1"
   end
 end

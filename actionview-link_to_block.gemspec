@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'actionview/link_to_with/version'
+require 'actionview/link_to_block/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "actionview-link_to_with"
-  spec.version       = Actionview::LinkToWith::VERSION
+  spec.name          = "actionview-link_to_block"
+  spec.version       = Actionview::LinkToBlock::VERSION
   spec.authors       = ["sanemat"]
   spec.email         = ["o.gata.ken@gmail.com"]
   spec.description   = %q{TODO: Write a gem description}
