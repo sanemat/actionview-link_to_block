@@ -1,5 +1,6 @@
 appraise 'actionview_4_1' do
-  gem 'actionview', github: 'rails/rails', branch: 'master'
+  gem 'actionview', github: 'rails', branch: 'master'
+  gem 'actionpack', github: 'rails', branch: 'master'
 end
 
 appraise 'actionpack_4_0' do
