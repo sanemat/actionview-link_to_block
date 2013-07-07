@@ -65,6 +65,12 @@ actionpack v3.2(rails v3.2)
 
     gem 'actionpack', '>= 3.0', '< 4.0'
 
+## Testing
+
+    $ bundle
+    $ bundle exec rake appraisal:install
+    $ bundle exec rake appraisal
+
 ## Contributing
 
 1. Fork it
