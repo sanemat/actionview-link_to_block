@@ -7,7 +7,12 @@
 Add helper method, `link_to_block`, `link_to_block_if`, `link_to_block_unless`, `link_to_block_unless_current`.
 This is symmetrical to `link_to`, `link_to_if`, `link_to_unless`, `link_to_unless_current`.
 
-link_to a
+`link_to` accepts complex html as block, like below:
+
+    <%= link_to user_path(@user) do %>
+      <i class="icon-ok icon-white"></i> Do it@
+    <% end %>
+    # http://stackoverflow.com/questions/9401942/using-link-to-with-embedded-html
 
 ## Installation
 
