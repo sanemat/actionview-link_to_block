@@ -9,6 +9,8 @@ This is symmetrical to `link_to`, `link_to_if`, `link_to_unless`, `link_to_unles
 
 `link_to_block*` always accepts block.
 
+## Usage
+
 `link_to` accepts complex html as block, like below:
 
     <%= link_to user_path(@user) do %>
@@ -44,9 +46,24 @@ Or install it yourself as:
 
     $ gem install actionview-link_to_block
 
-## Usage
+## Requirement
 
-TODO: Write usage instructions here
+`actionview-link_to_block` has no gem dependency in gemspec, but this is not correctly.
+`actionview` extracts from `actionpack` on rails4.1.
+You can see `Appraisals` file and `/gemfiles` directory.
+
+actionview v4.1(rails v4.1)
+
+    gem 'actionview', github: 'rails', branch: 'master'
+    gem 'actionpack', github: 'rails', branch: 'master'
+
+actionpack v4.0(rails v4.0)
+
+    gem 'actionpack', '>= 4.0.0'
+
+actionpack v3.2(rails v3.2)
+
+    gem 'actionpack', '>= 3.0', '< 4.0'
 
 ## Contributing
 
