@@ -14,9 +14,9 @@ module LinkToBlock
           else
             if block_given?
               html_options, options = options, name
-              link_to(capture(&block), options, html_options)
+              link_to capture(&block), options, html_options
             else
-              link_to(name, options, html_options)
+              link_to name, options, html_options
             end
           end
         end
