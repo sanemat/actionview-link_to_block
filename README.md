@@ -29,7 +29,7 @@ Then use `link_to_block_if` below:
     <%= link_to_block_if condition, user_path(@user) do %>
       <i class="icon-ok icon-white"></i> Do it@
     <% end %>
-    
+
     #=> if condition truthy, then shows html and link, else if condition falsy, then show only html.
 
 ## Installation
@@ -67,9 +67,18 @@ actionpack v3.2(rails v3.2)
 
 ## Testing
 
+Test against actionpack v3.2, v4.0 and v4.1, run below:
+
     $ bundle
-    $ bundle exec rake appraisal:install
-    $ bundle exec rake appraisal
+    $ bundle exec appraisal install
+    $ bundle exec appraisal rake
+
+Test for specific version:
+
+    $ bundle exec appraisal install
+    $ bundle exec appraisal actionpack_4_0 rake
+
+Prepare actionpack_3_2(gem), actionpack_4_0(gem), actionview_4_1(github)
 
 ## Contributing
 
