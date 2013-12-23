@@ -3,6 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/actionview-link_to_block.png)](http://badge.fury.io/rb/actionview-link_to_block)
 [![Build Status](https://api.travis-ci.org/sanemat/actionview-link_to_block.png?branch=master)](https://travis-ci.org/sanemat/actionview-link_to_block)
 [![Code Climate](https://codeclimate.com/github/sanemat/actionview-link_to_block.png)](https://codeclimate.com/github/sanemat/actionview-link_to_block)
+[![Coverage Status](https://coveralls.io/repos/sanemat/actionview-link_to_block/badge.png?branch=master)](https://coveralls.io/r/sanemat/actionview-link_to_block)
 
 Add helper method, `link_to_block`, `link_to_block_if`, `link_to_block_unless`, `link_to_block_unless_current`.
 This is symmetrical to `link_to`, `link_to_if`, `link_to_unless`, `link_to_unless_current`.
