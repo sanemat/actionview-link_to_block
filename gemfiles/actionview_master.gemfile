@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem "coveralls", :require=>false
 gem "pry"
 gem "appraisal", :github=>"thoughtbot/appraisal"
-gem "actionpack", ">= 4.0", "< 4.1"
+gem "actionview", :github=>"rails", :branch=>"master"
+gem "actionpack", :github=>"rails", :branch=>"master"
 
 gemspec :path=>".././"
