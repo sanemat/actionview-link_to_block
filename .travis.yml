@@ -9,6 +9,7 @@ gemfile:
   - gemfiles/actionpack_3_2.gemfile
   - gemfiles/actionpack_4_0.gemfile
   - gemfiles/actionview_4_1.gemfile
+  - gemfiles/actionview_master.gemfile
 branches:
   only:
     - master
