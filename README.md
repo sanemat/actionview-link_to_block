@@ -53,22 +53,26 @@ Or install it yourself as:
 `actionview` extracts from `actionpack` on rails4.1.
 You can see `Appraisals` file and `/gemfiles` directory.
 
-actionview v4.1(rails v4.1)
+actionview v4.2(rails v4.2)
 
     gem 'actionview', github: 'rails', branch: 'master'
     gem 'actionpack', github: 'rails', branch: 'master'
 
+actionview v4.1(rails v4.1)
+
+    gem 'actionpack', '~> 4.1.0'
+
 actionpack v4.0(rails v4.0)
 
-    gem 'actionpack', '>= 4.0.0'
+    gem 'actionpack', '~> 4.0.0'
 
 actionpack v3.2(rails v3.2)
 
-    gem 'actionpack', '>= 3.0', '< 4.0'
+    gem 'actionpack', '~> 3.0'
 
 ## Testing
 
-Test against actionpack v3.2, v4.0 and v4.1, run below:
+Test against actionpack v3.2, v4.0, v4.1 and v4.2, run below:
 
     $ bundle
     $ bundle exec appraisal install
@@ -79,7 +83,7 @@ Test for specific version:
     $ bundle exec appraisal install
     $ bundle exec appraisal actionpack_4_0 rake
 
-Prepare actionpack_3_2(gem), actionpack_4_0(gem), actionview_4_1(github)
+Prepare actionpack_3_2(gem), actionpack_4_0(gem), actionview_4_1(gem), actionview_master(github)
 
 ## Contributing
 
