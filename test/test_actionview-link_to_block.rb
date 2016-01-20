@@ -50,7 +50,7 @@ class LinkToBlockTest < ActiveSupport::TestCase
 
   dom_assertion = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4.2")\
   ? ActionDispatch::Assertions::DomAssertions
-  : Rails::Dom::Testing::Assertions
+  : Rails::Dom::Testing::Assertions::DomAssertions
 
   include dom_assertion
   include ActionView::Context
