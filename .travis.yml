@@ -24,5 +24,3 @@ matrix:
     gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.1.8
     gemfile: gemfiles/actionview_master.gemfile
-  allow_failures:
-  - gemfile: gemfiles/actionview_master.gemfile
