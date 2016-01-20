@@ -20,7 +20,7 @@ matrix:
     gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.0.0
     gemfile: gemfiles/actionview_master.gemfile
-  - rvm: 2.1
+  - rvm: 2.1.8
     gemfile: gemfiles/actionview_5_0.gemfile
-  - rvm: 2.1
+  - rvm: 2.1.8
     gemfile: gemfiles/actionview_master.gemfile
