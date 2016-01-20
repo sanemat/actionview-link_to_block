@@ -17,14 +17,14 @@ gemfile:
 matrix:
   exclude:
   - rvm: 2.0.0
-      gemfile: gemfiles/actionview_5_0.gemfile
+    gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.0.0
-      gemfile: gemfiles/actionview_master.gemfile
+    gemfile: gemfiles/actionview_master.gemfile
   - rvm: 2.1
-      gemfile: gemfiles/actionview_5_0.gemfile
+    gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.1
-      gemfile: gemfiles/actionview_master.gemfile
+    gemfile: gemfiles/actionview_master.gemfile
   - rvm: 2.2
-      gemfile: gemfiles/actionview_5_0.gemfile
+    gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.2
-      gemfile: gemfiles/actionview_master.gemfile
+    gemfile: gemfiles/actionview_master.gemfile
