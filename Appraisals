@@ -27,4 +27,6 @@ end
 
 appraise 'actionpack_3_2' do
   gem 'actionpack', '>= 3.2', '< 4.0'
+  gem 'minitest', '~> 4.7.5'
+  gem 'test-unit', '~> 3.0'
 end
