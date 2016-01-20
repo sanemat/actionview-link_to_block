@@ -3,6 +3,18 @@ appraise 'actionview_master' do
   gem 'actionpack', github: 'rails', branch: 'master'
 end
 
+appraise 'actionview_5_0' do
+  version = '~> 5.0.0.beta'
+  gem 'actionview', version
+  gem 'actionpack', version
+end
+
+appraise 'actionview_4_2' do
+  version = '~> 4.2.0'
+  gem 'actionview', version
+  gem 'actionpack', version
+end
+
 appraise 'actionview_4_1' do
   version = '~> 4.1.0'
   gem 'actionview', version
