@@ -14,5 +14,5 @@ appraise 'actionpack_4_0' do
 end
 
 appraise 'actionpack_3_2' do
-  gem 'actionpack', '>= 3.0', '< 4.0'
+  gem 'actionpack', '>= 3.2', '< 4.0'
 end
