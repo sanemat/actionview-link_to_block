@@ -10,6 +10,7 @@ require autorun_path
 require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 require 'action_dispatch'
+require 'rails-dom-testing' if Gem::Version.new(ActiveSupport::VERSION::STRING) >= Gem::Version.new("4.2")
 
 # copy from action_view/test/abstract_unit.rb
 module RenderERBUtils
@@ -47,7 +48,11 @@ class LinkToBlockTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include routes.url_helpers
 
-  include ActionDispatch::Assertions::DomAssertions
+  dom_assertion = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4.2")\
+  ? ActionDispatch::Assertions::DomAssertions
+  : Rails::Dom::Testing::Assertions
+
+  include dom_assertion
   include ActionView::Context
   include RenderERBUtils
 
