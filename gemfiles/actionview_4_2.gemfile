@@ -7,5 +7,6 @@ gem "pry"
 gem "appraisal", :github=>"thoughtbot/appraisal"
 gem "actionview", "~> 4.2.0"
 gem "actionpack", "~> 4.2.0"
+gem "rails-dom-testing"
 
 gemspec :path=>".././"
