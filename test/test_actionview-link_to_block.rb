@@ -3,13 +3,15 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'active_support/version'
-autorun_path = ActiveSupport::VERSION::STRING.start_with?('3')\
+autorun_path = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4.0")\
   ? 'minitest/autorun'
   : 'active_support/testing/autorun'
 require autorun_path
+require 'action_controller'
 require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 require 'action_dispatch'
+require 'rails-dom-testing' if Gem::Version.new(ActiveSupport::VERSION::STRING) >= Gem::Version.new("4.2")
 
 # copy from action_view/test/abstract_unit.rb
 module RenderERBUtils
@@ -47,7 +49,11 @@ class LinkToBlockTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include routes.url_helpers
 
-  include ActionDispatch::Assertions::DomAssertions
+  dom_assertion = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4.2")\
+  ? ActionDispatch::Assertions::DomAssertions
+  : Rails::Dom::Testing::Assertions::DomAssertions
+
+  include dom_assertion
   include ActionView::Context
   include RenderERBUtils
 

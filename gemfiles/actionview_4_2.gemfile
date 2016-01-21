@@ -5,8 +5,8 @@ source "https://rubygems.org"
 gem "coveralls", :require=>false
 gem "pry"
 gem "appraisal", :github=>"thoughtbot/appraisal"
-gem "actionpack", ">= 3.2", "< 4.0"
-gem "minitest", "~> 4.7.5"
-gem "test-unit", "~> 3.0"
+gem "actionview", "~> 4.2.0"
+gem "actionpack", "~> 4.2.0"
+gem "rails-dom-testing"
 
 gemspec :path=>".././"
