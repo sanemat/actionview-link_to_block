@@ -7,7 +7,7 @@ autorun_path = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.n
   ? 'minitest/autorun'
   : 'active_support/testing/autorun'
 require autorun_path
-require 'action_controller' if Gem::Version.new(ActiveSupport::VERSION::STRING) >= Gem::Version.new("5.0")
+require 'action_controller'
 require 'action_view'
 require 'action_view/link_to_block/link_to_block'
 require 'action_dispatch'
