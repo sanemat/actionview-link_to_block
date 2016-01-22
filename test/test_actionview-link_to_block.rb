@@ -3,7 +3,7 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'active_support/version'
-autorun_path = Gem::Version.new(ActionPack::VERSION::STRING) < Gem::Version.new("4.0")\
+autorun_path = Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4.0")\
   ? 'minitest/autorun'
   : 'active_support/testing/autorun'
 require autorun_path
