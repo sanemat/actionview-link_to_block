@@ -2,9 +2,10 @@ language: ruby
 sudo: false
 rvm:
   - 2.0.0
-  - 2.1.8
-  - 2.2.4
-  - 2.3.0
+  - 2.1.10
+  - 2.2.6
+  - 2.3.3
+  - 2.4.0
 before_install:
   - gem update bundler
 gemfile:
@@ -20,7 +21,13 @@ matrix:
     gemfile: gemfiles/actionview_5_0.gemfile
   - rvm: 2.0.0
     gemfile: gemfiles/actionview_master.gemfile
-  - rvm: 2.1.8
+  - rvm: 2.1.10
     gemfile: gemfiles/actionview_5_0.gemfile
-  - rvm: 2.1.8
+  - rvm: 2.1.10
     gemfile: gemfiles/actionview_master.gemfile
+  - rvm: 2.4.0
+    gemfile: gemfiles/actionview_4_0.gemfile
+  - rvm: 2.4.0
+    gemfile: gemfiles/actionview_4_1.gemfile
+  - rvm: 2.4.0
+    gemfile: gemfiles/actionview_4_2.gemfile
