@@ -8,5 +8,11 @@ gem "appraisal", :github=>"thoughtbot/appraisal"
 gem "actionview", "~> 4.2.0"
 gem "actionpack", "~> 4.2.0"
 gem "rails-dom-testing"
+platforms :ruby do
+  if RUBY_VERSION > "2.1.0"
+  else
+    gem 'nokogiri', '1.6.8.1'
+  end
+end
 
 gemspec :path=>".././"
