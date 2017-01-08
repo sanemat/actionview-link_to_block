@@ -5,4 +5,4 @@ gemspec
 
 gem 'coveralls', require: false
 gem 'pry'
-gem 'appraisal', github: 'thoughtbot/appraisal'
+gem 'appraisal'
